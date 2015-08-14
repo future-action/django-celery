@@ -296,7 +296,15 @@ def periodic_task_form():
 class PeriodicTaskAdmin(admin.ModelAdmin):
     model = PeriodicTask
     form = periodic_task_form()
-    list_display = ('__unicode__', 'enabled')
+    search_fields = ('name', 'task',)
+    list_display = (
+        '__unicode__',
+        'task',
+        'interval',
+        'args',
+        'kwargs',
+        'enabled',
+    )
     actions = ['enable_tasks',
                'disable_tasks']
     fieldsets = (
