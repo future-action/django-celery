@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
 from anyjson import loads
@@ -359,11 +360,11 @@ class PeriodicTaskAdmin(admin.ModelAdmin):
         qs = super(PeriodicTaskAdmin, self).get_queryset(request)
         return qs.select_related('interval', 'crontab')
 
-    @action(_('Enable selected periodic tasks'))
+    @action(u'Включить выбранные периодические задачи')
     def enable_tasks(self, request, queryset):
         queryset.update(enabled=True)
 
-    @action(_('Disable selected periodic tasks'))
+    @action(u'Выключить выбранные периодические задачи')
     def disable_tasks(self, request, queryset):
         queryset.update(enabled=False)
 
