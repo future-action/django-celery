@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('task_id', models.CharField(unique=True, max_length=255, verbose_name='task id')),
-                ('status', models.CharField(default=b'PENDING', max_length=50, verbose_name='state', choices=[(b'RECEIVED', b'RECEIVED'), (b'RETRY', b'RETRY'), (b'REVOKED', b'REVOKED'), (b'SUCCESS', b'SUCCESS'), (b'STARTED', b'STARTED'), (b'FAILURE', b'FAILURE'), (b'PENDING', b'PENDING')])),
+                ('status', models.CharField(max_length=50, verbose_name='state', default='PENDING', choices=[('FAILURE', 'FAILURE'), ('PENDING', 'PENDING'), ('RECEIVED', 'RECEIVED'), ('RETRY', 'RETRY'), ('REVOKED', 'REVOKED'), ('STARTED', 'STARTED'), ('SUCCESS', 'SUCCESS')])),
                 ('result', djcelery.picklefield.PickledObjectField(default=None, null=True, editable=False)),
                 ('date_done', models.DateTimeField(auto_now=True, verbose_name='done at')),
                 ('traceback', models.TextField(null=True, verbose_name='traceback', blank=True)),
@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
             name='TaskState',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('state', models.CharField(db_index=True, max_length=64, verbose_name='state', choices=[(b'RECEIVED', b'RECEIVED'), (b'RETRY', b'RETRY'), (b'REVOKED', b'REVOKED'), (b'SUCCESS', b'SUCCESS'), (b'STARTED', b'STARTED'), (b'FAILURE', b'FAILURE'), (b'PENDING', b'PENDING')])),
+                ('state', models.CharField(max_length=64, verbose_name='state', db_index=True, choices=[('FAILURE', 'FAILURE'), ('PENDING', 'PENDING'), ('RECEIVED', 'RECEIVED'), ('RETRY', 'RETRY'), ('REVOKED', 'REVOKED'), ('STARTED', 'STARTED'), ('SUCCESS', 'SUCCESS')])),
                 ('task_id', models.CharField(unique=True, max_length=36, verbose_name='UUID')),
                 ('name', models.CharField(max_length=200, null=True, verbose_name='name', db_index=True)),
                 ('tstamp', models.DateTimeField(verbose_name='event received at', db_index=True)),

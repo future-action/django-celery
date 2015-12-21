@@ -19,7 +19,8 @@ from .picklefield import PickledObjectField
 from .utils import now
 from .compat import python_2_unicode_compatible
 
-TASK_STATE_CHOICES = zip(states.ALL_STATES, states.ALL_STATES)
+TASK_STATE_CHOICES = list(zip(states.ALL_STATES, states.ALL_STATES))
+TASK_STATE_CHOICES.sort()
 
 
 @python_2_unicode_compatible
